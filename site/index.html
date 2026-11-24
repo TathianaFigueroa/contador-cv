@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<!-- Purpose: the one page — a box for the CV summary, its live character count against 500, the over-limit message and the clear button (REQ-001, REQ-002, REQ-003). -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contador de caracteres para tu CV</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="styles.css">
+<script src="main.js" defer></script>
+</head>
+<body>
+<main>
+  <h1>Resumen de tu CV</h1>
+  <label for="resumen">Escribe o pega aquí el resumen de tu CV</label>
+  <textarea id="resumen" rows="10" autocomplete="off"></textarea>
+  <div class="pie">
+    <p id="contador" aria-live="polite"></p>
+    <button type="button" id="borrar">Borrar todo</button>
+  </div>
+  <p id="aviso" role="alert" hidden>Tu resumen supera los 500 caracteres. Acórtalo para que quepa.</p>
+</main>
+</body>
+</html>

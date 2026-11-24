@@ -1,0 +1,88 @@
+/* Purpose: a clean, readable single page in light and dark mode (NG-008); the over-limit look follows the message. */
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+body {
+  margin: 0;
+  background: Canvas;
+  color: CanvasText;
+}
+
+main {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin: 0 0 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+textarea {
+  box-sizing: border-box;
+  width: 100%;
+  font: inherit;
+  font-size: 1rem;
+  padding: 0.75rem;
+  border: 1px solid GrayText;
+  border-radius: 0.5rem;
+  resize: vertical;
+}
+
+.pie {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+#contador {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+button {
+  font: inherit;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid GrayText;
+  background: ButtonFace;
+  color: ButtonText;
+  cursor: pointer;
+}
+
+#aviso {
+  margin: 0.75rem 0 0;
+  font-weight: 600;
+  color: #b00020;
+}
+
+.excedido textarea {
+  border-color: #b00020;
+}
+
+.excedido #contador {
+  color: #b00020;
+  font-weight: 600;
+}
+
+@media (prefers-color-scheme: dark) {
+  #aviso,
+  .excedido #contador {
+    color: #ff8a80;
+  }
+
+  .excedido textarea {
+    border-color: #ff8a80;
+  }
+}
