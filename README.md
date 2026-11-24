@@ -2,7 +2,25 @@
 
 One static web page, in Spanish, where a person types or pastes the summary of their CV and sees, as they write, how many characters it holds against a limit of 500. Past 500 a message says so, without ever blocking the typing; one button clears the text, and undo right after brings it back. Nothing about the person is kept or sent anywhere.
 
-The spec is ratified (PRD.md, BASELINE.md, ARCHITECTURE.md, DECISIONS.md, INVENTORY.md). There is no code yet: how to run the page, how to test it (`sh checks/test.sh`) and the preview command arrive with the code skeleton.
+The spec is ratified (PRD.md, BASELINE.md, ARCHITECTURE.md, DECISIONS.md, INVENTORY.md). The page is the three files in `site/`.
+
+## Preview
+
+Open `site/index.html` in a browser, or serve the folder with any static server, for example:
+
+    cd site && python -m http.server 8080
+
+## Tests
+
+The acceptance tests (`tests/acceptance/`) run in Docker, in Chromium, Firefox and WebKit:
+
+    docker compose -f docker-compose.acceptance.yml up --build --abort-on-container-exit --exit-code-from tests
+
+They were written by the build session, not by ViD's separate test author, and are not ViD ledger evidence: INVENTORY.md's rows still read `owed: spec-only — first stage` until `/vid develop` writes and proves the ledger.
+
+## Publish
+
+Upload only the files in `site/` to a static host that serves HTTPS only and can send Strict-Transport-Security (DECISIONS.md D-019).
 
 ## Before you put this online
 

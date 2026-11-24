@@ -1,0 +1,24 @@
+# Purpose: run the acceptance tests in Docker — the page served by its own container, the tests driving Chromium, Firefox and WebKit against it by name.
+services:
+  product:
+    build:
+      context: .
+      target: product
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8080/index.html')"]
+      interval: 2s
+      retries: 60
+  tests:
+    build:
+      context: .
+      target: tests
+    depends_on:
+      product:
+        condition: service_healthy
+    volumes:
+      - .:/app:ro
+      - ./.vid/acceptance-results:/results
+    environment:
+      PRODUCT_HOST: product
+      PRODUCT_PORT: "8080"
+    command: sh -c 'node /deps/node_modules/@playwright/test/cli.js test -c /app/tests/acceptance/playwright.config.js ${SELECTOR:-}'
