@@ -165,6 +165,67 @@ F-04 | review | advisory | A-011, A-012 | repaired | evidence: A-011 said the pa
 
 review: whole, round 2, 2 findings
 
+### 2026-11-24 — strength pass
+
+```vid-prd-findings
+F-05 | strength | blocking | INVENTORY.md:ROW-005, INVENTORY.md:ROW-035 | repaired | evidence: a message toggled on key release shows at 501 typed, but a paste, drop or undo to above 500 showed none until a key; ROW-035 now covers every way upward, at once
+F-06 | strength | blocking | INVENTORY.md:ROW-005, INVENTORY.md:ROW-035 | repaired | evidence: a transient toast passes "shown at 501"; ROW-005 now requires the message to stay while the text stays above 500
+F-07 | strength | blocking | INVENTORY.md:ROW-008 | repaired | evidence: test text of single-code-point emoji and precomposed accents gives equal counts under both rules; ROW-008 now pins multi-code-point emoji and a combining accent
+F-08 | strength | advisory | INVENTORY.md:ROW-036 | repaired | evidence: over-limit styling never removed after coming back down; ROW-036 now checks after coming down
+F-09 | strength | advisory | INVENTORY.md:ROW-021 | repaired | evidence: the caret could jump only above 500; ROW-021 now checks above 500 too
+F-10 | strength | advisory | INVENTORY.md:ROW-002, INVENTORY.md:ROW-019, INVENTORY.md:ROW-048 | repaired | evidence: a debounced count passes retrying checks; "at once" now means one read without retry and a second after one quiet second
+F-11 | strength | advisory | INVENTORY.md:ROW-020 | repaired | evidence: a count that skips composing input with no end-of-composition recount; ROW-020 now names the sequence and drives real composition in Chromium
+F-12 | strength | advisory | INVENTORY.md:ROW-019, INVENTORY.md:ROW-046 | repaired | evidence: a handler filtering on the kind of edit passes value-setting tests; edits are now made as the browser makes them
+F-13 | strength | advisory | INVENTORY.md:ROW-042 | repaired | evidence: a code-point fallback passes a plain-letter test; ROW-042 now removes the facility before the script and enters a combining accent and a joined emoji
+F-14 | strength | advisory | INVENTORY.md:ROW-023 | repaired | evidence: rows left out of the three-engine run; ROW-002, ROW-024, ROW-043, ROW-046 and ROW-048 added
+F-15 | strength | advisory | INVENTORY.md:ROW-001 | repaired | evidence: expected counts taken from the engine's own segmenter agree by construction; they now come from Unicode's published grapheme-break data, pinned
+F-16 | strength | advisory | INVENTORY.md:ROW-001, REQ-001, A-001 | repaired | evidence: invisible characters were undecided between "what the person sees" and grapheme clusters; the owner ruled they count (A-016), REQ-001 amended and ROW-001 rewritten
+F-17 | strength | blocking | INVENTORY.md:RULE-001 | repaired | evidence: the word list held unescaped parentheses and did not compile; escaped, and every rule's pattern checked on a planted folder
+F-18 | strength | blocking | INVENTORY.md:RULE-001, INVENTORY.md:RULE-002, INVENTORY.md:RULE-003, INVENTORY.md:RULE-005, INVENTORY.md:RULE-007, INVENTORY.md:RULE-008 | overruled A-018 | evidence: critical — the reviewers read the fifth field as an expected exit code of grep -L; ViD's belief rests on checks/census.sh lines 12-15 and 412-420 (orphans are the left list minus the right list; the exit code is not read) and the template's rule grammar (the fifth field is the tier); the owner kept the rules as written
+F-19 | strength | blocking | INVENTORY.md:HOS-001, INVENTORY.md:HOS-002 | repaired | evidence: the probes showed failure with the line inserted but never a pass without it; both now pass with the line removed
+F-20 | strength | blocking | INVENTORY.md:ROW-014 | repaired | evidence: headless Chromium does not restore a textarea on reload and a harness back navigation may skip the back-forward cache; ROW-014 now requires a cache restore and autocomplete="off"
+F-21 | strength | advisory | INVENTORY.md:ROW-015 | repaired | evidence: a short banned-word list passes other usted forms and catches "su" inside "supera"; ROW-015 now compares the full set of strings, whole words
+F-22 | strength | advisory | INVENTORY.md:ROW-022 | repaired | evidence: headless Chromium guesses UTF-8; ROW-022 now also checks the declared charset in the first 1024 bytes
+F-23 | strength | advisory | INVENTORY.md:ROW-012, INVENTORY.md:ROW-051 | repaired | evidence: window.name and history state unchecked, and requests at close unseen by the page; both added
+F-24 | strength | advisory | INVENTORY.md:HOS-002 | repaired | evidence: a preconnect sends no request the browser logs; HOS-002 now counts connections at the outside host's socket
+F-25 | strength | advisory | INVENTORY.md:RULE-001, INVENTORY.md:RULE-005 | repaired | evidence: literal extension lists and missing call names; both scan every shipped file and RULE-001 adds setAttribute, url( and Worker
+F-26 | strength | advisory | INVENTORY.md:ROW-012, INVENTORY.md:ROW-045 | repaired | evidence: "its own three files" against a shipped icon file; ROW-012 now allows the shipped site/ files and ROW-045 names an empty inline icon
+F-27 | strength | advisory | INVENTORY.md:RULE-005, INVENTORY.md:ROW-045 | repaired | evidence: an inline SVG icon's namespace address matches RULE-005; the icon is now data:, and comments are written with a space after //
+F-28 | strength | advisory | INVENTORY.md:RULE-008, INVENTORY.md:ROW-045 | repaired | evidence: the phone pattern matched SVG path data and dates; reworked, the icon has no path data
+F-29 | strength | advisory | INVENTORY.md:RULE-002, INVENTORY.md:ROW-024, INVENTORY.md:ROW-043 | repaired | evidence: the rule's words forbade the load and page-shown recount the rows need; RULE-002 reworded to what its census holds
+F-30 | strength | advisory | INVENTORY.md:ROW-023, INVENTORY.md:ROW-020, INVENTORY.md:ROW-032 | repaired | evidence: Cmd+Z, menu undo and non-Chromium composition cannot be driven in the Linux harness; rows narrowed to what it drives, the rest a real-device checklist line
+F-31 | strength | advisory | INVENTORY.md:ROW-011, INVENTORY.md:ROW-032 | repaired | evidence: repeat; ROW-032 now holds only what ROW-011 does not
+F-32 | strength | advisory | INVENTORY.md:ROW-003, INVENTORY.md:ROW-004 | repaired | evidence: repeated thousands-separator clause; kept in ROW-004 only
+F-33 | strength | blocking | INVENTORY.md:HOS-001, INVENTORY.md:RULE-001 | repaired | evidence: round 2 — setAttribute had joined the word list, so HOS-001's planted path was no longer unnamed; it now uses a computed property name
+F-34 | strength | blocking | INVENTORY.md:ROW-051 | repaired | evidence: round 2 — observing only the listening host misses a beacon to another host on close; every request the browser attempts is now observed
+F-35 | strength | blocking | INVENTORY.md:RULE-008 | repaired | evidence: round 2 — common phone formats passed; any run of seven or more digits now counts
+F-36 | strength | blocking | INVENTORY.md:ROW-019, INVENTORY.md:ROW-023 | repaired | evidence: round 2 — edits the harness cannot make natively; ROW-019 now names how each is driven, and RULE-009 forbids a count that reads the kind of edit
+F-37 | strength | blocking | INVENTORY.md:HOS-001, INVENTORY.md:RULE-001 | repaired | evidence: round 3 — no probe shows the census itself catching a plain call; HOS-003 added at the owner's ruling
+F-38 | strength | blocking | INVENTORY.md:ROW-019, INVENTORY.md:ROW-023 | repaired | evidence: round 3 — ROW-023 required ROW-019 in three engines with no stated path; narrowed at the owner's ruling
+F-39 | strength | blocking | INVENTORY.md:HOS-001 | repaired | evidence: after the owner's rulings — the probe watched only the listening host; it now watches every request after load and reads storage
+F-40 | strength | blocking | INVENTORY.md:ROW-042 | repaired | evidence: after the owner's rulings — one named pair let a hand-written fallback pass; the row now runs ROW-001's sampled strings with the facility removed
+F-41 | strength | blocking | INVENTORY.md:ROW-001, REQ-001, A-016 | repaired | evidence: after the owner's rulings — joiners attached to a character against "each invisible character counts"; settled by the owner's answers on joined emoji (A-001 restated) and ROW-001 rewritten
+F-42 | strength | blocking | INVENTORY.md:ROW-001, REQ-001, A-001 | repaired | evidence: Unicode's grapheme data glues a mark to a preceding space, the owner's rule does not; ROW-001 now states the owner's correction with sampled cases
+F-43 | strength | blocking | INVENTORY.md:HOS-001 | repaired | evidence: the probe covered typing only; it now covers a whole session from load to close, recorded at the network exit
+```
+
+review: whole, round 5, 39 findings
+
+### 2026-11-24 — final review
+
+```vid-prd-findings
+F-51 | final | blocking | DECISIONS.md, INVENTORY.md:ROW-043, CON-002 | repaired | evidence: critical — D-005 emptied the box on every pageshow, wiping text typed during load; replaced by D-016 (only on a back-forward cache return)
+F-52 | final | blocking | BASELINE.md, GRADING-CHECKLIST.md | repaired | evidence: critical — an ES module does not load from file://; BASELINE now names a classic script with defer
+F-53 | final | blocking | DECISIONS.md, INVENTORY.md:ROW-001, A-001 | repaired | evidence: critical — "letter or emoji" undefined, keycaps ambiguous, prepend rule missing from D-015; replaced by D-017, ROW-001 names keycaps as one
+F-54 | final | blocking | INVENTORY.md:ROW-015, CON-003, A-010 | repaired | evidence: critical — the interface words beyond the message were unrecorded; recorded as ViD decision A-021, no placeholder
+F-55 | final | advisory | INVENTORY.md:ROW-001, INVENTORY.md:ROW-023 | repaired | evidence: the pinned Unicode version was unnamed; D-018 names Unicode 15.1
+F-56 | final | advisory | INVENTORY.md:ROW-040, DECISIONS.md | repaired | evidence: host HSTS support and max-age unstated; ROW-040 now requires at least one year, D-019 names the host property
+F-57 | final | advisory | INVENTORY.md:ROW-042, CON-004 | repaired | evidence: ROW-042 allowed a fallback count CON-004 forbids; now no reading at all
+F-58 | final | advisory | GRADING-CHECKLIST.md, A-012 | noted | evidence: the framing line asks for a header-only protection under a struck security quality; left as written, raised with the owner
+```
+
+review: final, round 1, 8 findings, read: PRD.md ARCHITECTURE.md DECISIONS.md BASELINE.md INVENTORY.md GRADING-CHECKLIST.md
+
 ## Ratifications
 
 - 2026-11-24 — thesis+contract — 3a7c18d
@@ -174,3 +235,47 @@ review: whole, round 2, 2 findings
 ## Appends
 
 <!-- Append-only below this line. -->
+
+### 2026-11-24 (test list sitting)
+
+```vid-prd-answers
+A-015 | human | 2026-11-24 | Q: Which browsers must the page support? | A: accepted as recommended: the current and previous major versions of Chrome, Edge, Firefox and Safari; on an older browser that lacks the counting feature the page shows no count rather than a wrong one | settles: OQ-1, CON-004
+A-016 | human | 2026-11-24 | Q: Do invisible characters pasted from Word or PDF (zero-width space, soft hyphen, direction marks) count? | A: accepted as recommended: they count, one each, like every other character, because the site that receives the summary counts them too | settles: OQ-2, REQ-001
+A-017 | human | 2026-11-24 | Q: Phone keyboards usually have no undo; keep the clear button as ruled? | A: accepted as recommended: keep it as ruled, one press with no question, undo wherever the keyboard has it | settles: OQ-3 | unchanged: REQ-003
+A-018 | human | 2026-11-24 | Q: A strength reviewer says the census rules judge the file search by its exit code; keep the rules as written? | A: accepted as recommended: keep the rules as written; the census compares two lists of files and ignores the exit code, and the number beside each rule is its tier | settles: contract
+A-019 | human | 2026-11-24 | Q: On an older browser that lacks the counting feature the page shows no count; should the over-limit message stay hidden there too? | A: yes: on such a browser the over-limit message stays hidden too, like the count; the message rule's first failure clause applies to the browsers the page supports (CON-004) | settles: REQ-002, CON-004
+A-001 AMENDED | human | 2026-11-24 | Q: How does the count treat spaces, line breaks and special letters? | A: accepted as recommended: every character in the box counts as one, each one the person sees (spaces and line breaks included, an accented letter or an emoji counting as one however many parts it is built from), plus each invisible character standing on its own (a zero-width space, a soft hyphen, a direction mark); an invisible joiner or modifier attached to the letter or emoji before it is part of that character | settles: REQ-001, MECH-01 | unchanged: REQ-002
+A-020 | human | 2026-11-24 | Q: Your answers changed two failure clauses: the counter's first clause now counts each invisible character standing on its own as one, and the message's first clause now applies only on the browsers the page supports. Accept both? | A: yes, both changes accepted as written | settles: REQ-001, REQ-002
+```
+
+```vid-prd
+REQ-001 AMENDED | functional | T1 | Below the text box the page shows how many characters the box holds out of the limit of 500, in the form A-007 states, updated on every change to the text whatever made it; an invisible character standing on its own (a zero-width space, a soft hyphen, a direction mark) counts as one like any other, and an invisible part of an emoji or an accented letter adds nothing to it; on an older browser that lacks the counting feature (CON-004) no count is shown. | fail-if: (1) after a change the shown count differs from the characters the person sees in the box, where each space, each line break, each accented letter and each emoji counts as one, an emoji built from several joined parts (a family, a skin tone, a flag) counting as one, and where each zero-width space, soft hyphen and direction mark standing on its own counts as one; (2) after text is pasted, cut, dropped or undone the count does not change until a further key is pressed; (3) the count shows characters remaining instead of characters used; (4) the count stops at 500 while the box holds more | serves: the person knows at every moment how long their summary is against the 500 they are allowed (G1) | authority: provisional | confirms_via: owner-decision/no | source: seed, A-001, A-007, A-008, A-016 | covers: DIM-char-count-rule, DIM-count-display | phase: pilot | feature: FEAT-01 | plain: Below the box the page shows how many characters you have written out of 500, counting each character you see, space, line break and lone invisible character as one. | arms: 1 strengthened, 2 retained, 3 retained, 4 retained
+CON-004 | constraint | T1 | The page works in the current and previous major versions of Chrome, Edge, Firefox and Safari; on an older browser that lacks the counting feature it shows neither a count nor the over-limit message, rather than wrong ones. | authority: authoritative | source: A-015, A-019 | covers: DIM-count-display
+REQ-002 AMENDED | functional | T1 | While the count the page shows is above 500 characters the message A-006 states is shown below the box, and while that count is 500 or fewer no such message is shown; nothing ever blocks or cuts what the person types or pastes; on an older browser that lacks the counting feature (CON-004) neither the count nor the message is shown. | fail-if: (1) on a browser the page supports, the box holds 501 characters and the over-limit message is not shown; (2) the over-limit message is shown while the box holds 500 characters or fewer; (3) the message is still shown after the text is brought back to 500 characters or fewer; (4) a key press, paste or drop that would take the text past 500 characters is refused, or the text is cut to 500; (5) the over-limit message is shown while the count the page shows is 500 or fewer, or is not shown while that count is above 500 | serves: the person learns the moment their summary no longer fits, without losing anything they wrote (G1) | authority: provisional | confirms_via: owner-decision/no | source: seed, A-001, A-003, A-006, A-019, thesis MECH-02 | covers: DIM-limit-boundary | phase: pilot | feature: FEAT-02 | plain: When your text passes 500 characters a message says so and disappears once you are back to 500 or fewer; typing is never blocked. | arms: 1 retained, 2 retained, 3 retained, 4 retained, 5 retained
+```
+
+```vid-prd-findings
+F-44 | review | blocking | REQ-001 | repaired | evidence: round 1 — the first rewording let a joined emoji count as its parts; repaired at the owner's answer to keep an emoji one however built
+F-45 | review | blocking | A-001, A-016 | repaired | evidence: round 1 — A-016 changed A-001's rule; A-001 restated with the owner's yes
+F-46 | review | advisory | REQ-002, CON-004 | repaired | evidence: round 1 — whether the message shows on an older browser was undecided; the owner ruled it stays hidden (A-019)
+F-47 | review | blocking | REQ-001 | accepted A-020 | evidence: arm 1 — round 2 — the arm now counts each invisible character standing on its own as one, where it used to fail a count differing from what the person sees; the owner accepted the change
+F-48 | review | blocking | REQ-002 | accepted A-020 | evidence: arm 1 — round 2 — the arm now applies on the browsers the page supports only; the owner accepted the narrowing
+F-49 | review | blocking | REQ-001, CON-004 | repaired | evidence: round 2 — REQ-001 now states no count is shown on an older browser, as CON-004 does
+F-50 | review | blocking | REQ-001 | repaired | evidence: round 2 — the plain sentence said every invisible character counts; it now says a lone invisible character
+```
+
+RESOLVED: (OQ-1) A-015 — Which browsers must the page support? The counting rule relies on a browser feature that older versions lack (Firefox before version 125, for example).
+
+RESOLVED: (OQ-2) A-016 — Do invisible characters that paste in from Word or PDF (zero-width space, soft hyphen, direction marks) count? The rule counts every character the person sees, and these show nothing.
+
+RESOLVED: (OQ-3) A-017 — Phone keyboards usually have no undo, so undo after a mistaken clear does not reach most phone users. Keep the clear button as ruled (no confirmation, undo on keyboards), or change it?
+
+review: delta, round 2, 7 findings
+
+### 2026-11-24 (final review repairs)
+
+```vid-prd-answers
+A-021 | model_proposed | 2026-11-24 | Q: What words does the interface use beyond the over-limit message? | A: page title "Contador de caracteres para tu CV"; heading "Resumen de tu CV"; box label "Escribe o pega aquí el resumen de tu CV"; no placeholder; button "Borrar todo"; the count as A-007 states | settles: CON-003
+```
+
+review: final, round 1, 0 findings, see 2026-11-24 — final review
