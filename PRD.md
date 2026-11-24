@@ -101,6 +101,24 @@ FEAT-02 | G1 | The over-limit message
 FEAT-03 | G2 | The clear button
 ```
 
+```vid-prd
+REQ-001 | functional | T1 | Below the text box the page shows how many characters the box holds out of the limit of 500, in the form A-007 states, updated on every change to the text whatever made it. | fail-if: (1) after a change the shown count differs from the characters the person sees in the box, where each space, each line break, each accented letter and each emoji counts as one; (2) after text is pasted, cut, dropped or undone the count does not change until a further key is pressed; (3) the count shows characters remaining instead of characters used; (4) the count stops at 500 while the box holds more | serves: the person knows at every moment how long their summary is against the 500 they are allowed (G1) | authority: provisional | confirms_via: owner-decision/no | source: seed, A-001, A-007, A-008 | covers: DIM-char-count-rule, DIM-count-display | phase: pilot | feature: FEAT-01 | plain: Below the box the page always shows how many characters you have written out of 500, counting every visible character, space and line break as one.
+REQ-002 | functional | T1 | While the box holds more than 500 characters the message A-006 states is shown below it, and while it holds 500 or fewer no such message is shown; nothing ever blocks or cuts what the person types or pastes. | fail-if: (1) the box holds 501 characters and the over-limit message is not shown; (2) the over-limit message is shown while the box holds 500 characters or fewer; (3) the message is still shown after the text is brought back to 500 characters or fewer; (4) a key press, paste or drop that would take the text past 500 characters is refused, or the text is cut to 500 | serves: the person learns the moment their summary no longer fits, without losing anything they wrote (G1) | authority: provisional | confirms_via: owner-decision/no | source: seed, A-003, A-006 | covers: DIM-limit-boundary | phase: pilot | feature: FEAT-02 | plain: When your text passes 500 characters a message says so and disappears once you are back to 500 or fewer; typing is never blocked.
+REQ-003 | functional | T1 | One press of the clear button empties the text box at once, with no confirmation, and the count and the over-limit message follow the empty box; undo right after clearing brings the cleared text back. | fail-if: (1) after one press of the clear button the box still holds any character; (2) a confirmation or any other question appears before the box is emptied; (3) after clearing the count shows anything other than zero characters; (4) after clearing the over-limit message is still shown; (5) undo pressed right after clearing does not bring back the text that was cleared | serves: the person can start a new attempt in one press, without losing their work to a mistaken press (G2) | authority: authoritative | source: seed, A-002, A-014 | covers: DIM-clear-action | phase: pilot | feature: FEAT-03 | plain: One press of the clear button empties the box straight away, without asking, and the count goes back to zero; undo right after brings the text back.
+CON-001 | constraint | T0 | The text the person writes, and anything derived from it, never leaves the open page: it is never sent over the network, never placed in the page's address, and never written to cookies or to any storage in the browser. | authority: authoritative | source: seed | covers: DIM-nfr-privacy, DIM-text-egress, DIM-no-retention
+CON-002 | constraint | T1 | The text box opens empty on every load of the page, and the browser is told not to restore or remember what was typed in it. | authority: provisional | confirms_via: owner-decision/no | source: seed, A-009 | covers: DIM-no-retention
+CON-003 | constraint | T1 | Every word of the interface is in Spanish, worded as A-010 states, and the page declares Spanish as its language. | authority: provisional | confirms_via: owner-decision/no | source: seed, A-010 | covers: DIM-spanish-copy
+NG-001 | non_goal | - | Saving the text, in any form, is not part of this version. | authority: authoritative | source: seed
+NG-002 | non_goal | - | Accounts or sign-in are not part of this version. | authority: authoritative | source: seed
+NG-003 | non_goal | - | Sending or downloading the CV is not part of this version. | authority: authoritative | source: seed
+NG-004 | non_goal | - | A spell checker added by the page is not part of this version. | authority: authoritative | source: seed
+NG-005 | non_goal | - | Writing suggestions are not part of this version. | authority: authoritative | source: seed
+NG-006 | non_goal | - | Languages other than Spanish are not part of this version. | authority: authoritative | source: seed
+NG-007 | non_goal | - | Analytics of any kind are not part of this version. | authority: authoritative | source: seed
+NG-008 | non_goal | - | An elaborate design is not part of this version: a clean, readable page is enough. | authority: authoritative | source: seed
+NG-009 | non_goal | - | Accessibility work beyond what a plain page gives, such as announcing the count to screen readers, is deferred out of this version. | authority: authoritative | source: A-012
+```
+
 ## Answer ledger
 
 ```vid-prd-answers
@@ -117,6 +135,7 @@ A-010 | model_proposed | 2026-11-24 | Q: Which Spanish does the interface use? |
 A-011 | model_proposed | 2026-11-24 | Q: Must the page work on a phone? | A: yes, readable and usable at phone width with the count visible below the box | settles: thesis | shown: pause-1 170471696
 A-012 | human | 2026-11-24 | Q: Which qualities does the contract hold? | A: accepted as recommended: the eight kept (privacy, what counts as one character, how and when the count is shown, the 500 boundary, what clearing does, the Spanish wording, nothing kept across reloads or visits, the text never leaves the page); struck and out of this version: accessibility, phone layout as a requirement, third-party loads, browser spell-check and autofill, an on-page privacy note, text box shape, unrequested controls, large-paste performance, and the catalog floor dimensions security, availability, operability, core-loop continuity, identity, consent, lifecycle, operations, feedback intake, trust states, authorization, notifications, data integrity, proof thresholds, instrumentation; case-by-case dimensions technical SEO and i18n-locale ruled out | settles: contract
 A-013 | human | 2026-11-24 | Q: The critic's finding F-01: sites that receive the text may count emoji or line breaks as two characters; add help text? | A: accepted as recommended: leave it; the counting rule of A-001 stands and no help text is added | settles: MECH-01
+A-014 | human | 2026-11-24 | Q: If the person presses the clear button by mistake, does undo right after it bring the text back? | A: accepted as recommended: yes, undo right after clearing brings the cleared text back | settles: REQ-003
 ```
 
 ## Open decisions
@@ -131,7 +150,15 @@ A-013 | human | 2026-11-24 | Q: The critic's finding F-01: sites that receive th
 F-01 | red-team | advisory | MECH-01, thesis | overruled A-013 | evidence: value-coherence — destinations may count UTF-16 code units or CRLF line breaks, so a summary at 498 / 500 here may be too long there; A-001 is the owner's explicit rule, so a question for the owner, who left it
 ```
 
+### 2026-11-24 — pause 2 sitting
+
+```vid-prd-findings
+F-02 | audit | advisory | DIM-clear-action, REQ-003, MECH-03 | repaired | evidence: a mistaken press of the clear button loses the only copy of the text, and whether undo restores it depended on how a builder clears the box; the owner ruled undo restores it (A-014); REQ-003 now carries it as fail-if part (5)
+```
+
 ## Ratifications
+
+- 2026-11-24 — thesis+contract — 3a7c18d
 
 ## Appends
 
