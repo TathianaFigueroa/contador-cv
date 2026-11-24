@@ -37,3 +37,17 @@ enforced structurally — the rest still matter.
 8. Keep a copy of PRD.md and DECISIONS.md somewhere off the server.
 9. First week: read the logs daily. Boring logs are the goal.
 10. When something is wrong, run /vid:vid-fix and answer its questions — don't patch by hand.
+
+## Commit ids in PRD.md
+
+The repository's history was rewritten once, before it was made public, to replace the author's work email with GitHub's private address; nothing else changed. PRD.md's `## Ratifications` lines name the commits by their ids before that rewrite:
+
+| Before | Now | Commit |
+|---|---|---|
+| 3a7c18d | 4c83eb3 | PRD pause 1: thesis and contract ratified |
+| 8cb11f9 | 8a926b8 | PRD pause 2: gap answers ratified |
+| 6d33f71 | fc9c8e0 | PRD pause 3: final ratification |
+| c755c53 | 1a43cd7 | PRD: final ratification record line |
+| fa92a1d | 84ac497 | Spec commit: technical foundation, test inventory and checks |
+| af6865f | 44bfa46 | The page: character counter, over-limit message and clear button |
+| 53c8e26 | 5b84b57 | Acceptance tests in Docker across Chromium, Firefox and WebKit |
